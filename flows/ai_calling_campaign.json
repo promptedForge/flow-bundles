@@ -1,0 +1,183 @@
+{
+  "data": {
+    "nodes": [
+      {
+        "width": 384,
+        "height": 626,
+        "id": "DataInput-campaign",
+        "type": "genericNode",
+        "position": { "x": 100, "y": 100 },
+        "data": {
+          "type": "DataInput",
+          "node": {
+            "template": {
+              "data": {
+                "required": true,
+                "show": true,
+                "name": "data",
+                "display_name": "Campaign Data",
+                "type": "str",
+                "multiline": true,
+                "placeholder": "JSON array of contacts for calling campaign: [{\"contact_id\": \"123\"}, {\"contact_id\": \"456\"}]"
+              }
+            },
+            "description": "Input contact list for AI calling campaign"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "BatchProcessor-calls",
+        "type": "genericNode",
+        "position": { "x": 600, "y": 100 },
+        "data": {
+          "type": "BatchProcessor",
+          "node": {
+            "template": {
+              "batch_operation": {
+                "required": true,
+                "show": true,
+                "name": "batch_operation",
+                "display_name": "Batch Operation",
+                "type": "str",
+                "options": ["bulk_ai_calls"],
+                "value": "bulk_ai_calls"
+              },
+              "batch_size": {
+                "required": false,
+                "show": true,
+                "name": "batch_size",
+                "display_name": "Batch Size",
+                "type": "int",
+                "value": 5
+              },
+              "delay_between_batches": {
+                "required": false,
+                "show": true,
+                "name": "delay_between_batches",
+                "display_name": "Delay Between Batches (seconds)",
+                "type": "int",
+                "value": 10
+              },
+              "assistant_id": {
+                "required": true,
+                "show": true,
+                "name": "assistant_id",
+                "display_name": "Assistant ID",
+                "type": "str",
+                "placeholder": "Assistant ID for all calls (e.g., asst_abc123)"
+              },
+              "number_pool_id": {
+                "required": false,
+                "show": true,
+                "name": "number_pool_id",
+                "display_name": "Number Pool ID",
+                "type": "str",
+                "placeholder": "Uses DEFAULT_NUMBER_POOL_ID if empty"
+              },
+              "emit_progress_hooks": {
+                "required": false,
+                "show": true,
+                "name": "emit_progress_hooks",
+                "display_name": "Emit Progress Hooks",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Bulk AI calling operations with progress tracking"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "RuntimeHooks-campaign",
+        "type": "genericNode",
+        "position": { "x": 1100, "y": 100 },
+        "data": {
+          "type": "RuntimeHooks",
+          "node": {
+            "template": {
+              "hook_mode": {
+                "required": true,
+                "show": true,
+                "name": "hook_mode",
+                "display_name": "Hook Mode",
+                "type": "str",
+                "options": ["aggregate"],
+                "value": "aggregate"
+              },
+              "component_filter": {
+                "required": false,
+                "show": true,
+                "name": "component_filter",
+                "display_name": "Component Filter",
+                "type": "str",
+                "value": "batch_processor"
+              },
+              "real_time_updates": {
+                "required": false,
+                "show": true,
+                "name": "real_time_updates",
+                "display_name": "Real-time Updates",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Campaign progress monitoring"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "DataOutput-results",
+        "type": "genericNode",
+        "position": { "x": 1600, "y": 100 },
+        "data": {
+          "type": "DataOutput",
+          "node": {
+            "template": {
+              "data": {
+                "required": true,
+                "show": true,
+                "name": "data",
+                "display_name": "Campaign Results",
+                "type": "str"
+              }
+            },
+            "description": "Campaign execution results and statistics"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "DataInput-campaign",
+        "sourceHandle": "{data}-{Data}",
+        "target": "BatchProcessor-calls",
+        "targetHandle": "{batch_data}-{Data}",
+        "id": "reactflow__edge-DataInput-campaign{data}-{Data}-BatchProcessor-calls{batch_data}-{Data}"
+      },
+      {
+        "source": "BatchProcessor-calls",
+        "sourceHandle": "{progress}-{Data}",
+        "target": "RuntimeHooks-campaign",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-BatchProcessor-calls{progress}-{Data}-RuntimeHooks-campaign{hook_input}-{Data}"
+      },
+      {
+        "source": "BatchProcessor-calls",
+        "sourceHandle": "{summary}-{Data}",
+        "target": "DataOutput-results",
+        "targetHandle": "{data}-{str}",
+        "id": "reactflow__edge-BatchProcessor-calls{summary}-{Data}-DataOutput-results{data}-{str}"
+      }
+    ]
+  },
+  "description": "Automated AI calling campaign with batch processing and real-time monitoring",
+  "name": "AI Calling Campaign",
+  "last_tested_version": "1.0.0",
+  "endpoint_name": "ai_calling_campaign"
+}

@@ -1,0 +1,389 @@
+{
+  "data": {
+    "nodes": [
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatInput-lead",
+        "type": "genericNode",
+        "position": { "x": 100, "y": 100 },
+        "data": {
+          "type": "ChatInput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "placeholder": "Tell me about your business needs...",
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Lead Input",
+                "type": "str",
+                "list": false
+              },
+              "sender": {
+                "required": false,
+                "placeholder": "Lead",
+                "show": true,
+                "multiline": false,
+                "value": "Lead",
+                "password": false,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "list": false
+              },
+              "sender_name": {
+                "required": false,
+                "placeholder": "Prospect",
+                "show": true,
+                "multiline": false,
+                "value": "Prospect",
+                "password": false,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "type": "str",
+                "list": false
+              }
+            },
+            "description": "Capture lead qualification input"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "AgentDelegator-qualifier",
+        "type": "genericNode",
+        "position": { "x": 600, "y": 100 },
+        "data": {
+          "type": "AgentDelegator",
+          "node": {
+            "template": {
+              "user_input": {
+                "required": true,
+                "show": true,
+                "name": "user_input",
+                "display_name": "Lead Response",
+                "type": "str"
+              },
+              "delegation_mode": {
+                "required": true,
+                "show": true,
+                "name": "delegation_mode",
+                "display_name": "Qualification Mode",
+                "type": "str",
+                "options": ["auto_detect", "force_specialist"],
+                "value": "force_specialist"
+              },
+              "primary_system_prompt": {
+                "required": false,
+                "show": true,
+                "name": "primary_system_prompt",
+                "display_name": "Qualification Prompt",
+                "type": "str",
+                "value": "You are a lead qualification specialist. Analyze the prospect's response to determine their business needs, budget, timeline, and decision-making authority. Score the lead quality from 1-10."
+              },
+              "enable_hooks": {
+                "required": false,
+                "show": true,
+                "name": "enable_hooks",
+                "display_name": "Enable Qualification Tracking",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Intelligent lead qualification and scoring"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "GoHighLevelClient-leadcapture",
+        "type": "genericNode",
+        "position": { "x": 1100, "y": 100 },
+        "data": {
+          "type": "GoHighLevelClient",
+          "node": {
+            "template": {
+              "operation": {
+                "required": true,
+                "show": true,
+                "name": "operation",
+                "display_name": "Lead Operation",
+                "type": "str",
+                "options": ["create_contact", "update_contact", "add_tag"],
+                "value": "create_contact"
+              },
+              "email": {
+                "required": false,
+                "show": true,
+                "name": "email",
+                "display_name": "Lead Email",
+                "type": "str",
+                "placeholder": "prospect@company.com"
+              },
+              "phone": {
+                "required": false,
+                "show": true,
+                "name": "phone",
+                "display_name": "Lead Phone",
+                "type": "str",
+                "placeholder": "+1234567890"
+              },
+              "first_name": {
+                "required": false,
+                "show": true,
+                "name": "first_name",
+                "display_name": "First Name",
+                "type": "str",
+                "placeholder": "John"
+              },
+              "last_name": {
+                "required": false,
+                "show": true,
+                "name": "last_name",
+                "display_name": "Last Name",
+                "type": "str",
+                "placeholder": "Doe"
+              },
+              "emit_hooks": {
+                "required": false,
+                "show": true,
+                "name": "emit_hooks",
+                "display_name": "Track Lead Creation",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Create and manage qualified leads in CRM"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "GoHighLevelClient-tagging",
+        "type": "genericNode",
+        "position": { "x": 1100, "y": 800 },
+        "data": {
+          "type": "GoHighLevelClient",
+          "node": {
+            "template": {
+              "operation": {
+                "required": true,
+                "show": true,
+                "name": "operation",
+                "display_name": "Tagging Operation",
+                "type": "str",
+                "options": ["add_tag"],
+                "value": "add_tag"
+              },
+              "contact_id": {
+                "required": false,
+                "show": true,
+                "name": "contact_id",
+                "display_name": "Contact ID",
+                "type": "str",
+                "placeholder": "Contact ID from lead creation"
+              },
+              "tag_name": {
+                "required": false,
+                "show": true,
+                "name": "tag_name",
+                "display_name": "Qualification Tag",
+                "type": "str",
+                "value": "qualified-lead"
+              }
+            },
+            "description": "Tag qualified leads for follow-up"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "AssistableAIClient-followup",
+        "type": "genericNode",
+        "position": { "x": 1600, "y": 400 },
+        "data": {
+          "type": "AssistableAIClient",
+          "node": {
+            "template": {
+              "operation": {
+                "required": true,
+                "show": true,
+                "name": "operation",
+                "display_name": "Follow-up Operation",
+                "type": "str",
+                "options": ["make_ai_call", "create_assistant"],
+                "value": "make_ai_call"
+              },
+              "assistant_id": {
+                "required": false,
+                "show": true,
+                "name": "assistant_id",
+                "display_name": "Follow-up Assistant ID",
+                "type": "str",
+                "placeholder": "Assistant for qualified lead follow-up"
+              },
+              "contact_id": {
+                "required": false,
+                "show": true,
+                "name": "contact_id",
+                "display_name": "Contact ID",
+                "type": "str",
+                "placeholder": "Contact ID from lead creation"
+              },
+              "number_pool_id": {
+                "required": false,
+                "show": true,
+                "name": "number_pool_id",
+                "display_name": "Number Pool ID",
+                "type": "str",
+                "placeholder": "Phone number pool for follow-up calls"
+              }
+            },
+            "description": "Automated follow-up for qualified leads"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "RuntimeHooks-qualification",
+        "type": "genericNode",
+        "position": { "x": 2100, "y": 100 },
+        "data": {
+          "type": "RuntimeHooks",
+          "node": {
+            "template": {
+              "hook_mode": {
+                "required": true,
+                "show": true,
+                "name": "hook_mode",
+                "display_name": "Tracking Mode",
+                "type": "str",
+                "options": ["aggregate"],
+                "value": "aggregate"
+              },
+              "component_filter": {
+                "required": false,
+                "show": true,
+                "name": "component_filter",
+                "display_name": "Track Components",
+                "type": "str",
+                "value": ""
+              },
+              "real_time_updates": {
+                "required": false,
+                "show": true,
+                "name": "real_time_updates",
+                "display_name": "Real-time Qualification Updates",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Track lead qualification progress and outcomes"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatOutput-results",
+        "type": "genericNode",
+        "position": { "x": 2600, "y": 400 },
+        "data": {
+          "type": "ChatOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "show": true,
+                "name": "input_value",
+                "display_name": "Qualification Results",
+                "type": "str"
+              },
+              "sender": {
+                "required": false,
+                "show": true,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "value": "AI"
+              },
+              "sender_name": {
+                "required": false,
+                "show": true,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "type": "str",
+                "value": "Qualification Agent"
+              }
+            },
+            "description": "Display qualification results and next steps"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "ChatInput-lead",
+        "sourceHandle": "{dataType}-{dataType}_text",
+        "target": "AgentDelegator-qualifier",
+        "targetHandle": "{user_input}-{str}",
+        "id": "reactflow__edge-ChatInput-lead{dataType}-{dataType}_text-AgentDelegator-qualifier{user_input}-{str}"
+      },
+      {
+        "source": "AgentDelegator-qualifier",
+        "sourceHandle": "{response}-{Data}",
+        "target": "GoHighLevelClient-leadcapture",
+        "targetHandle": "{email}-{str}",
+        "id": "reactflow__edge-AgentDelegator-qualifier{response}-{Data}-GoHighLevelClient-leadcapture{email}-{str}"
+      },
+      {
+        "source": "GoHighLevelClient-leadcapture",
+        "sourceHandle": "{result}-{Data}",
+        "target": "GoHighLevelClient-tagging",
+        "targetHandle": "{contact_id}-{str}",
+        "id": "reactflow__edge-GoHighLevelClient-leadcapture{result}-{Data}-GoHighLevelClient-tagging{contact_id}-{str}"
+      },
+      {
+        "source": "GoHighLevelClient-leadcapture",
+        "sourceHandle": "{result}-{Data}",
+        "target": "AssistableAIClient-followup",
+        "targetHandle": "{contact_id}-{str}",
+        "id": "reactflow__edge-GoHighLevelClient-leadcapture{result}-{Data}-AssistableAIClient-followup{contact_id}-{str}"
+      },
+      {
+        "source": "AgentDelegator-qualifier",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "RuntimeHooks-qualification",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-AgentDelegator-qualifier{hooks}-{Data}-RuntimeHooks-qualification{hook_input}-{Data}"
+      },
+      {
+        "source": "GoHighLevelClient-leadcapture",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "RuntimeHooks-qualification",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-GoHighLevelClient-leadcapture{hooks}-{Data}-RuntimeHooks-qualification{hook_input}-{Data}"
+      },
+      {
+        "source": "AssistableAIClient-followup",
+        "sourceHandle": "{result}-{Data}",
+        "target": "ChatOutput-results",
+        "targetHandle": "{input_value}-{str}",
+        "id": "reactflow__edge-AssistableAIClient-followup{result}-{Data}-ChatOutput-results{input_value}-{str}"
+      }
+    ]
+  },
+  "description": "Automated lead qualification workflow with CRM integration and AI follow-up",
+  "name": "Lead Qualification Flow",
+  "last_tested_version": "1.0.0",
+  "endpoint_name": "lead_qualification"
+}

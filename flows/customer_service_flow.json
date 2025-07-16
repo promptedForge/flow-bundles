@@ -1,0 +1,301 @@
+{
+  "data": {
+    "nodes": [
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatInput-a1b2c",
+        "type": "genericNode",
+        "position": { "x": 100, "y": 100 },
+        "data": {
+          "type": "ChatInput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "placeholder": "",
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Text",
+                "type": "str",
+                "list": false
+              },
+              "sender": {
+                "required": false,
+                "placeholder": "User",
+                "show": true,
+                "multiline": false,
+                "value": "User",
+                "password": false,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "list": false
+              },
+              "sender_name": {
+                "required": false,
+                "placeholder": "Customer",
+                "show": true,
+                "multiline": false,
+                "value": "Customer",
+                "password": false,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "type": "str",
+                "list": false
+              },
+              "session_id": {
+                "required": false,
+                "placeholder": "",
+                "show": true,
+                "multiline": false,
+                "value": "",
+                "password": false,
+                "name": "session_id",
+                "display_name": "Session ID",
+                "type": "str",
+                "list": false
+              }
+            },
+            "description": "Get chat input from the user.",
+            "base_classes": ["Message"]
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "AgentDelegator-x9y8z",
+        "type": "genericNode", 
+        "position": { "x": 600, "y": 100 },
+        "data": {
+          "type": "AgentDelegator",
+          "node": {
+            "template": {
+              "user_input": {
+                "required": true,
+                "show": true,
+                "name": "user_input",
+                "display_name": "User Input",
+                "type": "str"
+              },
+              "delegation_mode": {
+                "required": true,
+                "show": true,
+                "name": "delegation_mode", 
+                "display_name": "Delegation Mode",
+                "type": "str",
+                "options": ["auto_detect", "force_specialist", "primary_only", "hybrid"],
+                "value": "auto_detect"
+              },
+              "enable_hooks": {
+                "required": false,
+                "show": true,
+                "name": "enable_hooks",
+                "display_name": "Enable Runtime Hooks",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Intelligent task delegation between Primary and Specialist agents"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "AssistableAIClient-m5n6o",
+        "type": "genericNode",
+        "position": { "x": 1100, "y": 100 },
+        "data": {
+          "type": "AssistableAIClient",
+          "node": {
+            "template": {
+              "operation": {
+                "required": true,
+                "show": true,
+                "name": "operation",
+                "display_name": "Operation",
+                "type": "str",
+                "options": ["create_assistant", "chat_completion", "make_ai_call"],
+                "value": "chat_completion"
+              },
+              "assistant_id": {
+                "required": false,
+                "show": true,
+                "name": "assistant_id",
+                "display_name": "Assistant ID",
+                "type": "str",
+                "value": ""
+              },
+              "input_text": {
+                "required": false,
+                "show": true,
+                "name": "input_text",
+                "display_name": "Input Text",
+                "type": "str",
+                "value": ""
+              },
+              "emit_hooks": {
+                "required": false,
+                "show": true,
+                "name": "emit_hooks",
+                "display_name": "Emit Runtime Hooks",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Direct integration with Assistable AI API"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "GoHighLevelClient-p7q8r",
+        "type": "genericNode",
+        "position": { "x": 1100, "y": 800 },
+        "data": {
+          "type": "GoHighLevelClient",
+          "node": {
+            "template": {
+              "operation": {
+                "required": true,
+                "show": true,
+                "name": "operation",
+                "display_name": "Operation",
+                "type": "str",
+                "options": ["get_contact_by_email", "get_contact", "create_contact"],
+                "value": "get_contact_by_email"
+              },
+              "email": {
+                "required": false,
+                "show": true,
+                "name": "email",
+                "display_name": "Email",
+                "type": "str",
+                "value": ""
+              },
+              "emit_hooks": {
+                "required": false,
+                "show": true,
+                "name": "emit_hooks",
+                "display_name": "Emit Runtime Hooks",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Direct integration with GoHighLevel v2 API"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "RuntimeHooks-s3t4u",
+        "type": "genericNode",
+        "position": { "x": 1600, "y": 100 },
+        "data": {
+          "type": "RuntimeHooks",
+          "node": {
+            "template": {
+              "hook_mode": {
+                "required": true,
+                "show": true,
+                "name": "hook_mode",
+                "display_name": "Hook Mode",
+                "type": "str",
+                "options": ["monitor", "filter", "aggregate"],
+                "value": "monitor"
+              },
+              "real_time_updates": {
+                "required": false,
+                "show": true,
+                "name": "real_time_updates",
+                "display_name": "Real-time Updates",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Progress notification and monitoring system"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatOutput-v5w6x",
+        "type": "genericNode",
+        "position": { "x": 2100, "y": 100 },
+        "data": {
+          "type": "ChatOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "show": true,
+                "name": "input_value",
+                "display_name": "Text",
+                "type": "str"
+              },
+              "sender": {
+                "required": false,
+                "show": true,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "value": "AI"
+              },
+              "sender_name": {
+                "required": false,
+                "show": true,
+                "name": "sender_name",
+                "display_name": "Sender Name", 
+                "type": "str",
+                "value": "Customer Service Agent"
+              }
+            },
+            "description": "Display a chat message in the Playground."
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "ChatInput-a1b2c",
+        "sourceHandle": "{dataType}-{dataType}_text",
+        "target": "AgentDelegator-x9y8z",
+        "targetHandle": "{user_input}-{str}",
+        "id": "reactflow__edge-ChatInput-a1b2c{dataType}-{dataType}_text-AgentDelegator-x9y8z{user_input}-{str}"
+      },
+      {
+        "source": "AgentDelegator-x9y8z", 
+        "sourceHandle": "{response}-{Data}",
+        "target": "ChatOutput-v5w6x",
+        "targetHandle": "{input_value}-{str}",
+        "id": "reactflow__edge-AgentDelegator-x9y8z{response}-{Data}-ChatOutput-v5w6x{input_value}-{str}"
+      },
+      {
+        "source": "AssistableAIClient-m5n6o",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "RuntimeHooks-s3t4u",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-AssistableAIClient-m5n6o{hooks}-{Data}-RuntimeHooks-s3t4u{hook_input}-{Data}"
+      },
+      {
+        "source": "GoHighLevelClient-p7q8r",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "RuntimeHooks-s3t4u",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-GoHighLevelClient-p7q8r{hooks}-{Data}-RuntimeHooks-s3t4u{hook_input}-{Data}"
+      }
+    ]
+  },
+  "description": "Customer service automation flow with agent delegation and runtime hooks",
+  "name": "Customer Service Flow",
+  "last_tested_version": "1.0.0",
+  "endpoint_name": "customer_service"
+}

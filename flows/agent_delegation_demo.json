@@ -1,0 +1,457 @@
+{
+  "data": {
+    "nodes": [
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatInput-demo",
+        "type": "genericNode",
+        "position": { "x": 100, "y": 100 },
+        "data": {
+          "type": "ChatInput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "placeholder": "Try: 'Create an assistant' or 'What is AI?' or 'Make a call to contact ID 123'",
+                "show": true,
+                "multiline": true,
+                "value": "",
+                "password": false,
+                "name": "input_value",
+                "display_name": "Demo Input",
+                "type": "str",
+                "list": false
+              },
+              "sender": {
+                "required": false,
+                "placeholder": "User",
+                "show": true,
+                "multiline": false,
+                "value": "User",
+                "password": false,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "list": false
+              },
+              "sender_name": {
+                "required": false,
+                "placeholder": "Demo User",
+                "show": true,
+                "multiline": false,
+                "value": "Demo User",
+                "password": false,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "type": "str",
+                "list": false
+              }
+            },
+            "description": "Demo input for agent delegation testing"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "AgentDelegator-demo",
+        "type": "genericNode",
+        "position": { "x": 600, "y": 100 },
+        "data": {
+          "type": "AgentDelegator",
+          "node": {
+            "template": {
+              "user_input": {
+                "required": true,
+                "show": true,
+                "name": "user_input",
+                "display_name": "User Input",
+                "type": "str"
+              },
+              "delegation_mode": {
+                "required": true,
+                "show": true,
+                "name": "delegation_mode",
+                "display_name": "Delegation Mode",
+                "type": "str",
+                "options": ["auto_detect", "force_specialist", "primary_only", "hybrid"],
+                "value": "auto_detect"
+              },
+              "enable_hooks": {
+                "required": false,
+                "show": true,
+                "name": "enable_hooks",
+                "display_name": "Enable Demo Hooks",
+                "type": "bool",
+                "value": true
+              },
+              "primary_system_prompt": {
+                "required": false,
+                "show": true,
+                "name": "primary_system_prompt",
+                "display_name": "Primary Agent Prompt",
+                "type": "str",
+                "value": "You are a helpful general AI assistant. When users ask about CRM operations, assistant creation, or phone calls, explain that you can delegate to a specialist agent. For general questions, provide helpful responses."
+              },
+              "specialist_system_prompt": {
+                "required": false,
+                "show": true,
+                "name": "specialist_system_prompt",
+                "display_name": "Specialist Agent Prompt",
+                "type": "str",
+                "value": "You are a CRM and AI calling specialist. You have access to Assistable AI and GoHighLevel tools. Demonstrate your capabilities and explain what operations you can perform."
+              }
+            },
+            "description": "Demonstration of intelligent agent delegation"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "AssistableAIClient-demo",
+        "type": "genericNode",
+        "position": { "x": 1100, "y": 100 },
+        "data": {
+          "type": "AssistableAIClient",
+          "node": {
+            "template": {
+              "operation": {
+                "required": true,
+                "show": true,
+                "name": "operation",
+                "display_name": "Demo Operation",
+                "type": "str",
+                "options": ["create_assistant", "chat_completion", "make_ai_call", "get_conversation"],
+                "value": "chat_completion"
+              },
+              "assistant_id": {
+                "required": false,
+                "show": true,
+                "name": "assistant_id",
+                "display_name": "Assistant ID",
+                "type": "str",
+                "placeholder": "Leave empty to use default demo assistant"
+              },
+              "input_text": {
+                "required": false,
+                "show": true,
+                "name": "input_text",
+                "display_name": "Input Text",
+                "type": "str",
+                "placeholder": "Text will be populated from delegation"
+              },
+              "assistant_name": {
+                "required": false,
+                "show": true,
+                "name": "assistant_name",
+                "display_name": "Demo Assistant Name",
+                "type": "str",
+                "value": "Demo Assistant"
+              },
+              "assistant_description": {
+                "required": false,
+                "show": true,
+                "name": "assistant_description",
+                "display_name": "Demo Assistant Description",
+                "type": "str",
+                "value": "Demonstration assistant created via agent delegation"
+              },
+              "emit_hooks": {
+                "required": false,
+                "show": true,
+                "name": "emit_hooks",
+                "display_name": "Emit Demo Hooks",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "Assistable AI operations for demonstration"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "GoHighLevelClient-demo",
+        "type": "genericNode",
+        "position": { "x": 1100, "y": 800 },
+        "data": {
+          "type": "GoHighLevelClient",
+          "node": {
+            "template": {
+              "operation": {
+                "required": true,
+                "show": true,
+                "name": "operation",
+                "display_name": "Demo CRM Operation",
+                "type": "str",
+                "options": ["get_contact", "create_contact", "get_contact_by_email", "switch_location"],
+                "value": "get_contact"
+              },
+              "contact_id": {
+                "required": false,
+                "show": true,
+                "name": "contact_id",
+                "display_name": "Demo Contact ID",
+                "type": "str",
+                "placeholder": "Contact ID for demonstration"
+              },
+              "email": {
+                "required": false,
+                "show": true,
+                "name": "email",
+                "display_name": "Demo Email",
+                "type": "str",
+                "placeholder": "demo@example.com"
+              },
+              "first_name": {
+                "required": false,
+                "show": true,
+                "name": "first_name",
+                "display_name": "Demo First Name",
+                "type": "str",
+                "value": "Demo"
+              },
+              "last_name": {
+                "required": false,
+                "show": true,
+                "name": "last_name",
+                "display_name": "Demo Last Name",
+                "type": "str",
+                "value": "User"
+              },
+              "emit_hooks": {
+                "required": false,
+                "show": true,
+                "name": "emit_hooks",
+                "display_name": "Emit Demo Hooks",
+                "type": "bool",
+                "value": true
+              }
+            },
+            "description": "GoHighLevel CRM operations for demonstration"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "RuntimeHooks-demo",
+        "type": "genericNode",
+        "position": { "x": 1600, "y": 400 },
+        "data": {
+          "type": "RuntimeHooks",
+          "node": {
+            "template": {
+              "hook_mode": {
+                "required": true,
+                "show": true,
+                "name": "hook_mode",
+                "display_name": "Demo Hook Mode",
+                "type": "str",
+                "options": ["monitor", "filter", "aggregate"],
+                "value": "monitor"
+              },
+              "filter_type": {
+                "required": false,
+                "show": true,
+                "name": "filter_type",
+                "display_name": "Filter Demo Hooks",
+                "type": "str",
+                "placeholder": "Filter by hook type (optional)"
+              },
+              "real_time_updates": {
+                "required": false,
+                "show": true,
+                "name": "real_time_updates",
+                "display_name": "Real-time Demo Updates",
+                "type": "bool",
+                "value": true
+              },
+              "max_hooks": {
+                "required": false,
+                "show": true,
+                "name": "max_hooks",
+                "display_name": "Max Demo Hooks",
+                "type": "int",
+                "value": 50
+              }
+            },
+            "description": "Monitor agent delegation and operation hooks"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatOutput-delegation",
+        "type": "genericNode",
+        "position": { "x": 2100, "y": 100 },
+        "data": {
+          "type": "ChatOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "show": true,
+                "name": "input_value",
+                "display_name": "Delegation Response",
+                "type": "str"
+              },
+              "sender": {
+                "required": false,
+                "show": true,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "value": "AI"
+              },
+              "sender_name": {
+                "required": false,
+                "show": true,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "type": "str",
+                "value": "Delegation System"
+              }
+            },
+            "description": "Display delegation results and agent responses"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatOutput-analysis",
+        "type": "genericNode",
+        "position": { "x": 2100, "y": 800 },
+        "data": {
+          "type": "ChatOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "show": true,
+                "name": "input_value",
+                "display_name": "Task Analysis",
+                "type": "str"
+              },
+              "sender": {
+                "required": false,
+                "show": true,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "value": "System"
+              },
+              "sender_name": {
+                "required": false,
+                "show": true,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "type": "str",
+                "value": "Task Analyzer"
+              }
+            },
+            "description": "Display task analysis and delegation reasoning"
+          }
+        }
+      },
+      {
+        "width": 384,
+        "height": 626,
+        "id": "ChatOutput-hooks",
+        "type": "genericNode",
+        "position": { "x": 2600, "y": 400 },
+        "data": {
+          "type": "ChatOutput",
+          "node": {
+            "template": {
+              "input_value": {
+                "required": true,
+                "show": true,
+                "name": "input_value",
+                "display_name": "Hook Information",
+                "type": "str"
+              },
+              "sender": {
+                "required": false,
+                "show": true,
+                "name": "sender",
+                "display_name": "Sender Type",
+                "type": "str",
+                "value": "System"
+              },
+              "sender_name": {
+                "required": false,
+                "show": true,
+                "name": "sender_name",
+                "display_name": "Sender Name",
+                "type": "str",
+                "value": "Hook Monitor"
+              }
+            },
+            "description": "Display runtime hook information and progress"
+          }
+        }
+      }
+    ],
+    "edges": [
+      {
+        "source": "ChatInput-demo",
+        "sourceHandle": "{dataType}-{dataType}_text",
+        "target": "AgentDelegator-demo",
+        "targetHandle": "{user_input}-{str}",
+        "id": "reactflow__edge-ChatInput-demo{dataType}-{dataType}_text-AgentDelegator-demo{user_input}-{str}"
+      },
+      {
+        "source": "AgentDelegator-demo",
+        "sourceHandle": "{response}-{Data}",
+        "target": "ChatOutput-delegation",
+        "targetHandle": "{input_value}-{str}",
+        "id": "reactflow__edge-AgentDelegator-demo{response}-{Data}-ChatOutput-delegation{input_value}-{str}"
+      },
+      {
+        "source": "AgentDelegator-demo",
+        "sourceHandle": "{task_analysis}-{Data}",
+        "target": "ChatOutput-analysis",
+        "targetHandle": "{input_value}-{str}",
+        "id": "reactflow__edge-AgentDelegator-demo{task_analysis}-{Data}-ChatOutput-analysis{input_value}-{str}"
+      },
+      {
+        "source": "AgentDelegator-demo",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "RuntimeHooks-demo",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-AgentDelegator-demo{hooks}-{Data}-RuntimeHooks-demo{hook_input}-{Data}"
+      },
+      {
+        "source": "AssistableAIClient-demo",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "RuntimeHooks-demo",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-AssistableAIClient-demo{hooks}-{Data}-RuntimeHooks-demo{hook_input}-{Data}"
+      },
+      {
+        "source": "GoHighLevelClient-demo",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "RuntimeHooks-demo",
+        "targetHandle": "{hook_input}-{Data}",
+        "id": "reactflow__edge-GoHighLevelClient-demo{hooks}-{Data}-RuntimeHooks-demo{hook_input}-{Data}"
+      },
+      {
+        "source": "RuntimeHooks-demo",
+        "sourceHandle": "{hooks}-{Data}",
+        "target": "ChatOutput-hooks",
+        "targetHandle": "{input_value}-{str}",
+        "id": "reactflow__edge-RuntimeHooks-demo{hooks}-{Data}-ChatOutput-hooks{input_value}-{str}"
+      }
+    ]
+  },
+  "description": "Interactive demonstration of agent delegation with real-time hook monitoring",
+  "name": "Agent Delegation Demo",
+  "last_tested_version": "1.0.0",
+  "endpoint_name": "agent_delegation_demo"
+}
